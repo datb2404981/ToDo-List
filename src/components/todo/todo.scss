@@ -1,0 +1,100 @@
+.todo_list{
+  display: flex;
+  align-content: baseline;
+  justify-content: center;
+  padding: 20px;
+
+  font-size: 100px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+
+  /* Sửa background-color thành background */
+    background: linear-gradient(
+      to bottom left,
+      #FFB965 0%,
+      #FFA73D 25%,
+      #FFA400 50%,
+      #FF0E0E 75%
+    );
+
+  /* Dùng background làm màu chữ */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.input_text {
+  display: flex; // tao o theo chieu ngang
+  align-items: center; //canh giua ngang
+  justify-content: center; //canh giua tren xuongs
+  gap: 5px; // khoang cach cua item
+
+  //tao input 
+  input[type="text"] {
+    border: 2px solid #ddd; //tao vien va mau vien
+    border-radius: 6px; // bo goc
+    outline: none; // an focus
+    padding: 10px; // khoang cach cua chu va vien
+    background-color: #f1f5f9;
+    font-size: 20px; // size chu
+  }
+  
+  input::placeholder {
+    color: #94a3b8;
+  }
+
+  button{
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: #4f98ed;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    color:#fff;
+
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+  }
+}
+
+.todo_data{
+  width: 400px;               /* độ rộng khung */
+  height: inherit;
+  margin: 20px auto; 
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 20px;
+  font-family: 'roman', serif;
+  
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: flex-start;
+  gap:7px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* đổ bóng nhẹ */
+
+  .task{
+    padding-left: 10px;
+    width: 380px;
+    border-bottom: 1.5px solid #ddd;
+  }
+  .task:last-child {
+    border-bottom: none;        /* bỏ gạch ở item cuối */
+  }
+}
+
+.todo_img {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  img {
+    width: 500px;   // thu nhỏ chiều rộng ảnh
+    height: auto;   // giữ tỉ lệ gốc
+  }
+}
