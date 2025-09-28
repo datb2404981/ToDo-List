@@ -62,32 +62,6 @@
   }
 }
 
-.todo_data{
-  width: 400px;               /* độ rộng khung */
-  height: inherit;
-  margin: 20px auto; 
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 20px;
-  font-family: 'roman', serif;
-  
-  flex-direction: column;
-  align-items: flex-start;
-  justify-items: flex-start;
-  gap:7px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* đổ bóng nhẹ */
-
-  .task{
-    padding-left: 10px;
-    width: 380px;
-    border-bottom: 1.5px solid #ddd;
-  }
-  .task:last-child {
-    border-bottom: none;        /* bỏ gạch ở item cuối */
-  }
-}
-
 .todo_img {
   display: flex;
   justify-content: center;
@@ -96,5 +70,82 @@
   img {
     width: 500px;   // thu nhỏ chiều rộng ảnh
     height: auto;   // giữ tỉ lệ gốc
+  }
+}
+
+.todo_data {
+  width: 400px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // để text bên trái, icon bên phải
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: #f9fafb; // hover đổi màu nền nhẹ
+    }
+
+      /* nhóm bên trái */
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 10px; // khoảng cách giữa checkbox và chữ
+      flex: 1;   // chiếm hết không gian còn lại
+    }
+
+    .circle-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      appearance: none; // bỏ style mặc định
+      border: 2px solid #555;
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .circle-checkbox:checked {
+      background-color: #4caf50; // màu xanh khi tick
+      border-color: #4caf50;
+    }
+
+    .circle-checkbox:checked::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    i {
+      color: #555;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        color: #ff6600; // icon đổi màu khi hover
+      }
+    }
   }
 }
