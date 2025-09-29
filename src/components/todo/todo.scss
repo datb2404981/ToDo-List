@@ -148,4 +148,80 @@
       }
     }
   }
+  h3{
+  display: flex; // tao o theo chieu ngang
+  align-items: center; //canh giua ngang
+  justify-content: center;
+  padding: 10px;
+  font-size:20px;
+  font-family: 'Open Sans', sans-serif;
+  }
+  .task_completed{
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // để text bên trái, icon bên phải
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: #f9fafb; // hover đổi màu nền nhẹ
+    }
+
+      /* nhóm bên trái */
+    .task-left {
+      display: flex;
+      align-items: center;
+      gap: 10px; // khoảng cách giữa checkbox và chữ
+      flex: 1;   // chiếm hết không gian còn lại
+    }
+
+    .circle-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      appearance: none; // bỏ style mặc định
+      border: 2px solid #555;
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .circle-checkbox:checked {
+      background-color: #4caf50; // màu xanh khi tick
+      border-color: #4caf50;
+    }
+
+    .circle-checkbox:checked::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+
+
+     /* Khi checkbox được check → gạch ngang chữ */
+    .circle-checkbox:checked + span {
+      text-decoration: line-through;
+      color: #999; // đổi màu chữ nhạt hơn
+    }
+
+    i {
+      color: #555;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        color: #ff6600; // icon đổi màu khi hover
+      }
+    }
+  }
 }
