@@ -9,15 +9,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ToDoApp from "./components/todo/toDoApp.jsx";
+import ErrorPage from "./pages/errors.jsx";
+import "antd/dist/reset.css";
+
+// 👇 import thêm
+import { ConfigProvider, App as AntdApp } from "antd";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <ToDoApp/>,
+        element: <ToDoApp />,
       },
       {
         path: "/users",
@@ -41,6 +47,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ConfigProvider>
+      <AntdApp>
+        <RouterProvider router={router} />
+      </AntdApp>
+    </ConfigProvider>
   </StrictMode>
 );
