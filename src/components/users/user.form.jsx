@@ -1,23 +1,49 @@
 import React, { useState } from "react";
-import { Input, Button } from "antd";
+import { Input, Button, Modal, notification, message } from "antd";
 import { createUserAPI } from "../../services/api.service";
 
 
-const UserForm = () => {
+const UserForm = (props) => {
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { loadUser } = props;
 
-  const handleClickBtn = async () => {
 
-    await createUserAPI(fullName, email, password, phone);
-    // reset input
+
+  const createUser = async () => {
+
+    try {
+      await createUserAPI(fullName, email, password, phone);
+      notification.success({
+        message: "Create User",
+        description: "Tạo user thành công",
+        placement: "topRight",
+      });
+
+      // reset input
+      resetAndCloseModal();
+
+      //update data
+      loadUser();
+    } catch (err) {
+      console.error("❌ Error:", err.response?.data || err.message);
+      message.error(
+        err.response?.data?.message || "❌ Lỗi khi tạo user, thử lại!"
+      );
+    }
+  }
+
+  const resetAndCloseModal = () => {
+    setIsModalOpen(false)
     setFullName("");
     setEmail("");
     setPassword("");
     setPhone("");
-  };
+  }
 
   return (
     <>
@@ -28,48 +54,59 @@ const UserForm = () => {
           gap: "15px",
           padding: "10px",
           fontSize: "15px",
-          maxWidth: "400px",
         }}
       >
-        <div>
-          <label>Full Name:</label>
-          <Input
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-          />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h3>Table User</h3>
+          <Button
+            type="primary"
+            onClick={() => setIsModalOpen(true)}
+            style={{ marginTop: "10px" }}
+          >
+            Create User
+          </Button>
         </div>
-        <div>
-          <label>Email:</label>
-          <Input
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <Input.Password
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Phone:</label>
-          <Input
-            placeholder="Phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-        <Button
-          type="primary"
-          onClick={handleClickBtn}
-          style={{ marginTop: "10px" }}
+        <Modal
+          title="Basic Modal"
+          closable={{ "aria-label": "Custom Close Button" }}
+          open={isModalOpen}
+          onOk={createUser}
+          onCancel={resetAndCloseModal}
+          maskClosable={false}
         >
-          Create User
-        </Button>
+          <div>
+            <label>Full Name:</label>
+            <Input
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Email:</label>
+            <Input
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Password:</label>
+            <Input.Password
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Phone:</label>
+            <Input
+              placeholder="Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+        </Modal>
       </div>
     </>
   );

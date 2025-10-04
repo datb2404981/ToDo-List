@@ -1,8 +1,10 @@
 import React from 'react'
+import LoginForm from '../components/auth/login';
 
 const LoginPage = () => {
+
   return (
-    <div>loginPage</div>
+    <div><LoginForm setUsername setPassword /></div>
   )
 }
 

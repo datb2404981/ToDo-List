@@ -14,6 +14,7 @@ import "antd/dist/reset.css";
 
 // 👇 import thêm
 import { ConfigProvider, App as AntdApp } from "antd";
+import Login from "./components/auth/login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <ProductsPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
     ],
   },
