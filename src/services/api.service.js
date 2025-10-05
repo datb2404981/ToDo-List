@@ -14,8 +14,17 @@ const createUserAPI = async (fullName, email, password, phone) => {
   });
 };
 
-const updateUserAPI = () => {
-  // TODO
+const updateUserAPI = (_id, fullName, phone) => {
+  const token = localStorage.getItem("token");
+  return axios.put(
+    "/api/v1/user", // endpoint
+    { _id, fullName, phone }, // body gửi đi
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // header truyền riêng
+      },
+    }
+  );
 };
 
 const loginUserAPI = async (username, password) => {
@@ -31,4 +40,19 @@ const fetchAllUserAPI = () => {
   });
 };
 
-export { createUserAPI, updateUserAPI, loginUserAPI, fetchAllUserAPI };
+const deleteUserAPI = (id) => {
+  const token = localStorage.getItem("token");
+  return axios.delete(`/api/v1/user/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export {
+  createUserAPI,
+  updateUserAPI,
+  loginUserAPI,
+  fetchAllUserAPI,
+  deleteUserAPI,
+};
