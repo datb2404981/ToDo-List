@@ -49,10 +49,39 @@ const deleteUserAPI = (id) => {
   });
 }
 
+const uploadFileAPI = (file, folder) => {
+  const token = localStorage.getItem("token");
+  let config = {
+    headers: {
+      "upload-type": folder,
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const bodyFormData = new FormData();
+  bodyFormData.append("fileImg", file);
+  return axios.post("/api/v1/file/upload", bodyFormData, config);
+}
+
+const updateUserAvatarAPI = (_id, fullName, phone,avatar) => {
+  const token = localStorage.getItem("token");
+  return axios.put(
+    "/api/v1/user", // endpoint
+    { _id:_id, fullName: fullName, phone: phone,avatar:avatar }, // body gửi đi
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // header truyền riêng
+      },
+    }
+  );
+};
+
 export {
   createUserAPI,
   updateUserAPI,
   loginUserAPI,
   fetchAllUserAPI,
   deleteUserAPI,
+  uploadFileAPI,
+  updateUserAvatarAPI,
 };

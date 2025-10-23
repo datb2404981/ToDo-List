@@ -81,9 +81,9 @@ const UserTable = ({ dataUsers, loadUser }) => {
           user={selectedUser}
           open={isDrawer}
           onClose={() => setIsDrawer(false)}
+          loadUser={loadUser}
         />
       )}
-      
     </>
   );
 };
